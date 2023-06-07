@@ -22,7 +22,8 @@ Discord bot named phos in C#
 ## Bot Function Goal
 
 **True goal is to make the bot specialized for chat replay.**\
-The desired function is:\
+The desired function can be illustrated as follows:
+
 >Being given two parameters, an initial message link and an end message link, outputs the messages sent in that channel in order from oldest to newest, sent at the same intervals as they were sent originally. \
 For example, User A sends the message "AHOY!" -> 3ms elapse -> User B sends "AHOY!!!" -> 2s elapse -> User C sends "lol." \
 phos will replay those messages as they were originally sent. 
