@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "V:\\dev\\phos\\phos.csproj": {}
+    "C:\\Users\\Millie's hat (real)\\dev\\phos_cs\\phos\\phos.csproj": {}
   },
   "projects": {
-    "V:\\dev\\phos\\phos.csproj": {
+    "C:\\Users\\Millie's hat (real)\\dev\\phos_cs\\phos\\phos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "V:\\dev\\phos\\phos.csproj",
+        "projectUniqueName": "C:\\Users\\Millie's hat (real)\\dev\\phos_cs\\phos\\phos.csproj",
         "projectName": "phos",
-        "projectPath": "V:\\dev\\phos\\phos.csproj",
-        "packagesPath": "C:\\Users\\phos\\.nuget\\packages\\",
-        "outputPath": "V:\\dev\\phos\\obj\\",
+        "projectPath": "C:\\Users\\Millie's hat (real)\\dev\\phos_cs\\phos\\phos.csproj",
+        "packagesPath": "C:\\Users\\Millie's hat (real)\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Millie's hat (real)\\dev\\phos_cs\\phos\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\phos\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Millie's hat (real)\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,6 +59,12 @@
             "DotNetEnv": {
               "target": "Package",
               "version": "[2.5.0, )"
+            },
+            "SonarAnalyzer.CSharp": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.3.0.71466, )"
             }
           },
           "imports": [

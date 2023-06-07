@@ -1,6 +1,8 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
+using phos.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ namespace phos.Commands
     {
         [Command("ping")]
         [Description("Responds with pong or some other quirky message.")]
+        [RequireCategoriesAttributes(ChannelCheckMode.Any, "Text Channels")]
         public async Task Ping(CommandContext context)
         {
             await context.Channel.SendMessageAsync("pong!")
@@ -69,7 +72,7 @@ namespace phos.Commands
 
         [Command("respondreaction")]
         [Description("Responds to user's reaction with the same reaction as text sent within 3 minutes.")]
-        public async Task ResponedReaction(CommandContext context)
+        public async Task RespondReaction(CommandContext context)
         {
             var interactivity = context.Client.GetInteractivity();
 
@@ -78,6 +81,36 @@ namespace phos.Commands
                 .ConfigureAwait(false);
 
             await context.Channel.SendMessageAsync(message.Result.Emoji);
+        }
+
+        // TimeSpan class will definitely be needed for chat replay
+        // poll does not exclude extraneous emojis
+
+        [Command("poll")]
+        [Description("Creates a poll")]
+        public async Task Poll(CommandContext context, TimeSpan duration, params DiscordEmoji[] emoji_options)
+        {
+            var interactivity = context.Client.GetInteractivity();
+
+            var options = emoji_options.Select(x => x.ToString());
+
+            var poll_embed = new DiscordEmbedBuilder
+            {
+                Title = "Poll",
+                Description = string.Join(" ", options)
+            };
+
+            var poll_message = await context.Channel.SendMessageAsync(embed: poll_embed).ConfigureAwait(false);
+            foreach (var option in emoji_options)
+            {
+                await poll_message.CreateReactionAsync(option).ConfigureAwait(false);
+            };
+
+            var result = await interactivity.CollectReactionsAsync(poll_message, duration).ConfigureAwait(false);
+
+            var poll_results = result.Select(x => $"{x.Emoji} : {x.Total}");
+
+            await context.Channel.SendMessageAsync(string.Join("\n", poll_results)).ConfigureAwait(false);
         }
 
     }

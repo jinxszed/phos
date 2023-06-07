@@ -59,7 +59,7 @@ namespace phos
                 DmHelp = true,
             };
 
-            // initializee commands
+            // initialize commands
             Commands = Client.UseCommandsNext(commands_config);
 
             Commands.RegisterCommands<TestCommands>();
