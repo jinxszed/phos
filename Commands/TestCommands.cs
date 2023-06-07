@@ -39,5 +39,12 @@ namespace phos.Commands
                 + "\ndisplay name: " + context.Member.Nickname)
                 .ConfigureAwait(false);
         }
+
+        [Command("messageid")]
+        [Description("returns message id")]
+        public async Task MessageID(CommandContext context)
+        {
+            await context.Channel.SendMessageAsync("filler").ConfigureAwait(false);
+        }
     }
 }
