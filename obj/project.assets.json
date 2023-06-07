@@ -5812,19 +5812,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Millie's hat (real)\\.nuget\\packages\\": {}
+    "C:\\Users\\phos\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Millie's hat (real)\\dev\\phos_cs\\phos\\phos.csproj",
+      "projectUniqueName": "V:\\dev\\phos\\phos.csproj",
       "projectName": "phos",
-      "projectPath": "C:\\Users\\Millie's hat (real)\\dev\\phos_cs\\phos\\phos.csproj",
-      "packagesPath": "C:\\Users\\Millie's hat (real)\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Millie's hat (real)\\dev\\phos_cs\\phos\\obj\\",
+      "projectPath": "V:\\dev\\phos\\phos.csproj",
+      "packagesPath": "C:\\Users\\phos\\.nuget\\packages\\",
+      "outputPath": "V:\\dev\\phos\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Millie's hat (real)\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\phos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
