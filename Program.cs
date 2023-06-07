@@ -2,15 +2,13 @@
 using System.Threading.Tasks;
 using DSharpPlus;
 
-
 namespace Phos
 {
     class Program
     {
         static async Task Main(string[] args)
         {
-            //DotNetEnv.Env.Load();
-            //var DISCORD_TOKEN = System.Environment.GetEnvironmentVariable("DISCORD_TOKEN");
+            
 
             var discord = new DiscordClient(new DiscordConfiguration()
             {

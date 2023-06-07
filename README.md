@@ -26,3 +26,4 @@ The desired function is:\
 - Might be punished for too many API requests in short succession
 - External emotes and animated emotes and stickers won't output unless the bot has Nitro and even normally they could be difficult to implement
 - (add more predictions here)
+
