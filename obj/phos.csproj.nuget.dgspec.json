@@ -44,6 +44,18 @@
               "target": "Package",
               "version": "[4.4.1, )"
             },
+            "DSharpPlus.CommandsNext": {
+              "target": "Package",
+              "version": "[4.4.1, )"
+            },
+            "DSharpPlus.Interactivity": {
+              "target": "Package",
+              "version": "[4.4.1, )"
+            },
+            "DSharpPlus.SlashCommands": {
+              "target": "Package",
+              "version": "[4.4.1, )"
+            },
             "DotNetEnv": {
               "target": "Package",
               "version": "[2.5.0, )"

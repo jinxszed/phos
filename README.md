@@ -14,6 +14,7 @@ Discord bot named phos in C#
     - Edit channel permissions (ex. lock down for non-moderators)
 - Chat interaction
     - Respond to certain messages or patterns with a message (ex. user: "hello" bot: "what's up")
+    - DM interaction support
 
 ## Bot Function Goal
 True goal is to make the bot specialized for chat replay.\
