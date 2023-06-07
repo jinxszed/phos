@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Interactivity.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,11 +41,44 @@ namespace phos.Commands
                 .ConfigureAwait(false);
         }
 
+        // TODO
         [Command("messageid")]
-        [Description("returns message id")]
+        [Description("returns message id (WIP)")]
+        [RequireRoles(RoleCheckMode.Any, "tweet")]
         public async Task MessageID(CommandContext context)
         {
             await context.Channel.SendMessageAsync("filler").ConfigureAwait(false);
         }
+
+
+        // this might be similiar to what i need to do the chat replay
+        [Command("respondmessage")]
+        [Description("Responds to user's input with the same input sent within 3 minutes.")]
+        public async Task RespondMessage(CommandContext context)
+        {
+            var interactivity = context.Client.GetInteractivity();
+
+            // x=>true, "x where true"; no matter what, it will always work (no prerequisite message)
+            // this is changed to have a condition, that it must have been sent in the same channel as the context
+            var message = await interactivity
+                .WaitForMessageAsync(x => x.Channel == context.Channel)
+                .ConfigureAwait(false);
+
+            await context.Channel.SendMessageAsync(message.Result.Content);
+        }
+
+        [Command("respondreaction")]
+        [Description("Responds to user's reaction with the same reaction as text sent within 3 minutes.")]
+        public async Task ResponedReaction(CommandContext context)
+        {
+            var interactivity = context.Client.GetInteractivity();
+
+            var message = await interactivity
+                .WaitForReactionAsync(x => x.Channel == context.Channel)
+                .ConfigureAwait(false);
+
+            await context.Channel.SendMessageAsync(message.Result.Emoji);
+        }
+
     }
 }
