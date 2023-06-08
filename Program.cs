@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using DSharpPlus;
-
-
-namespace phos
+﻿namespace phos
 {
     public class Program
     {

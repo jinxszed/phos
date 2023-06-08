@@ -1,11 +1,8 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using phos.Attributes;
 
 namespace phos.Commands
 {
@@ -13,6 +10,7 @@ namespace phos.Commands
     {
         [Command("ping")]
         [Description("Responds with pong or some other quirky message.")]
+        [RequireCategoriesAttributes(ChannelCheckMode.Any, "Text Channels")]
         public async Task Ping(CommandContext context)
         {
             await context.Channel.SendMessageAsync("pong!")
@@ -21,7 +19,7 @@ namespace phos.Commands
 
         [Command("add")]
         [Description("Adds two numbers.")]
-        public async Task Add(CommandContext context, 
+        public async Task Add(CommandContext context,
             [Description("first number")] double num,
             [Description("second number")] double addend)
         {
@@ -36,7 +34,7 @@ namespace phos.Commands
         public async Task UserName(CommandContext context)
         {
             await context.Channel
-                .SendMessageAsync("username: " + context.Member.Username 
+                .SendMessageAsync("username: " + context.Member.Username
                 + "\ndisplay name: " + context.Member.Nickname)
                 .ConfigureAwait(false);
         }
@@ -77,6 +75,36 @@ namespace phos.Commands
                 .ConfigureAwait(false);
 
             await context.Channel.SendMessageAsync(message.Result.Emoji);
+        }
+
+        // TimeSpan class will definitely be needed for chat replay
+        // poll does not exclude extraneous emojis
+
+        [Command("poll")]
+        [Description("Creates a poll")]
+        public async Task Poll(CommandContext context, TimeSpan duration, params DiscordEmoji[] emoji_options)
+        {
+            var interactivity = context.Client.GetInteractivity();
+
+            var options = emoji_options.Select(x => x.ToString());
+
+            var poll_embed = new DiscordEmbedBuilder
+            {
+                Title = "Poll",
+                Description = string.Join(" ", options)
+            };
+
+            var poll_message = await context.Channel.SendMessageAsync(embed: poll_embed).ConfigureAwait(false);
+            foreach (var option in emoji_options)
+            {
+                await poll_message.CreateReactionAsync(option).ConfigureAwait(false);
+            };
+
+            var result = await interactivity.CollectReactionsAsync(poll_message, duration).ConfigureAwait(false);
+
+            var poll_results = result.Select(x => $"{x.Emoji} : {x.Total}");
+
+            await context.Channel.SendMessageAsync(string.Join("\n", poll_results)).ConfigureAwait(false);
         }
 
     }
