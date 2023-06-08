@@ -16,14 +16,14 @@ namespace phos.Attributes
             check_mode = chk_mode;
             CategoryNames = new ReadOnlyCollection<string>(channel_names);
         }
-        public override Task<bool> ExecuteCheckAsync(CommandContext context, bool help)
+        public override Task<bool> ExecuteCheckAsync(CommandContext ctx, bool help)
         {
-            if (context.Guild == null || context.Member == null)
+            if (ctx.Guild == null || ctx.Member == null)
             {
                 return Task.FromResult(false);
             }
 
-            bool contains = CategoryNames.Contains(context.Channel.Parent.Name, StringComparer.OrdinalIgnoreCase);
+            bool contains = CategoryNames.Contains(ctx.Channel.Parent.Name, StringComparer.OrdinalIgnoreCase);
 
             return check_mode switch
             {

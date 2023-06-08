@@ -5,6 +5,7 @@ using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using phos.commands;
 using phos.Commands;
 using System.Text;
 
@@ -57,7 +58,9 @@ namespace phos
             // initialize commands
             Commands = Client.UseCommandsNext(commands_config);
 
-            Commands.RegisterCommands<TestCommands>();
+            Commands.RegisterCommands<TestCommands>(); // tutorial only
+            Commands.RegisterCommands<TeamCommands>(); // tutorial only
+            Commands.RegisterCommands<ReplayCommands>();
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
