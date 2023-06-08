@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace phos.Handlers.Dialogue
+namespace phos.Handlers.Dialogue.Steps
 {
     public interface IDialogueStep
     {
