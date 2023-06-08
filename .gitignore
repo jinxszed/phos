@@ -2,8 +2,6 @@ config.json
 bin/
 obj/
 .vs/
-*.csproj
-*.sln
 
 # stolen from https://stackoverflow.com/questions/30868544/gitignore-wont-ignore-vs-folder
 
