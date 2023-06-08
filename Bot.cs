@@ -1,22 +1,17 @@
 ﻿using DSharpPlus;
-using DSharpPlus.EventArgs;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.IO;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using phos.Commands;
+using System.Text;
 
 namespace phos
 {
     public class Bot
-    {    
+    {
         public DiscordClient Client { get; private set; }
         public CommandsNextExtension Commands { get; private set; }
         public InteractivityExtension Interactivity { get; private set; }
@@ -66,12 +61,12 @@ namespace phos
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
- 
+
         }
 
         private Task OnClientReady(DiscordClient client, ReadyEventArgs e)
         {
-            return Task.CompletedTask;  
+            return Task.CompletedTask;
         }
     }
 }

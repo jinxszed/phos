@@ -3,11 +3,6 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using phos.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace phos.Commands
 {
@@ -24,7 +19,7 @@ namespace phos.Commands
 
         [Command("add")]
         [Description("Adds two numbers.")]
-        public async Task Add(CommandContext context, 
+        public async Task Add(CommandContext context,
             [Description("first number")] double num,
             [Description("second number")] double addend)
         {
@@ -39,7 +34,7 @@ namespace phos.Commands
         public async Task UserName(CommandContext context)
         {
             await context.Channel
-                .SendMessageAsync("username: " + context.Member.Username 
+                .SendMessageAsync("username: " + context.Member.Username
                 + "\ndisplay name: " + context.Member.Nickname)
                 .ConfigureAwait(false);
         }
