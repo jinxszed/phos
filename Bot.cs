@@ -63,6 +63,7 @@ namespace phos
             Commands = Client.UseCommandsNext(commands_config);
 
             Commands.RegisterCommands<TestCommands>();
+            Commands.RegisterCommands<TeamCommands>(); // tutorial 
 
             await Client.ConnectAsync();
             await Task.Delay(-1);

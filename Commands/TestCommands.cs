@@ -50,7 +50,6 @@ namespace phos.Commands
             await context.Channel.SendMessageAsync("filler").ConfigureAwait(false);
         }
 
-
         // this might be similiar to what i need to do the chat replay
         [Command("respondmessage")]
         [Description("Responds to user's input with the same input sent within 3 minutes.")]
@@ -69,7 +68,7 @@ namespace phos.Commands
 
         [Command("respondreaction")]
         [Description("Responds to user's reaction with the same reaction as text sent within 3 minutes.")]
-        public async Task ResponedReaction(CommandContext context)
+        public async Task RespondReaction(CommandContext context)
         {
             var interactivity = context.Client.GetInteractivity();
 
