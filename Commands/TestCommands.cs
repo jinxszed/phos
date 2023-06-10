@@ -114,10 +114,24 @@ namespace phos.Commands
         public async Task Dialogue(CommandContext ctx)
         {
             var input_step = new TextStep("Enter something interesting", null/*temp null*/);
+            // var witty_step = new TextStep("Wow you're so funny", null);
+            var int_step = new IntStep("haha funny", null, max_value: 100);
 
             string input = string.Empty;
 
-            input_step.OnValidResult += (result) => input = result; // subscribe to input, add input to result 
+            input_step.OnValidResult += (result) =>
+            {
+                input = result;
+
+                if (result.ToLower() == "something interesting")
+                {
+                    // input_step.SetNextStep(witty_step);
+                    input_step.SetNextStep(max_value); //************ HERE AT 16:31
+
+                }
+            }; // subscribe to input, add input to result 
+
+
 
             var user_channel = await ctx.Member.CreateDmChannelAsync().ConfigureAwait(false); // how to allow DMs with bot
 
