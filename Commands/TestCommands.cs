@@ -3,6 +3,8 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using phos.Attributes;
+using phos.Handlers.Dialogue;
+using phos.Handlers.Dialogue.Steps;
 
 namespace phos.Commands
 {
@@ -105,6 +107,47 @@ namespace phos.Commands
             var poll_results = result.Select(x => $"{x.Emoji} : {x.Total}");
 
             await ctx.Channel.SendMessageAsync(string.Join("\n", poll_results)).ConfigureAwait(false);
+        }
+
+        [Command("dialogue")]
+        [Description("starts a dialogue with the bot")]
+        public async Task Dialogue(CommandContext ctx)
+        {
+            var input_step = new TextStep("Enter something interesting", null/*temp null*/);
+            // var witty_step = new TextStep("Wow you're so funny", null);
+            var int_step = new IntStep("haha funny", null, max_value: 100);
+
+            string input = string.Empty;
+
+            input_step.OnValidResult += (result) =>
+            {
+                input = result;
+
+                if (result.ToLower() == "something interesting")
+                {
+                    // input_step.SetNextStep(witty_step);
+                    input_step.SetNextStep(max_value); //************ HERE AT 16:31
+
+                }
+            }; // subscribe to input, add input to result 
+
+
+
+            var user_channel = await ctx.Member.CreateDmChannelAsync().ConfigureAwait(false); // how to allow DMs with bot
+
+            var input_dialogue_handler = new DialogueHandler(
+                ctx.Client,
+                user_channel,
+                ctx.User,
+                input_step
+                );
+
+            bool succeeded = await input_dialogue_handler.ProcessDialogue().ConfigureAwait(false);
+
+            if(!succeeded) { return; }
+
+            await ctx.Channel.SendMessageAsync(input).ConfigureAwait(false);
+
         }
 
     }
