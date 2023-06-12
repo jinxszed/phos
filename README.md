@@ -40,7 +40,7 @@ Essential functions: setreplay/play/stop\
 Convenience functions: pause/speed (change speed of messages up to 2x)\
 Prefix: "p!" (currently "!" for quicker testing)
 
-- only usable in `#bot_commands_spam`
+- only usable in `#dedicated_channel`
 - only member who used command for that thread can use commands in that thread (prevent trolling)
 - p!setreplay only accepts 2 input from #stream_chat (message links)
 - upon `p!setreplay <start> <end>`, responds with `Creating thread...` and creates thread named `#chat_replay_[counter]`
