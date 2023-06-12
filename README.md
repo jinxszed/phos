@@ -56,7 +56,7 @@ Prefix: "p!" (currently "!" for quicker testing)
 
 ## References
 
-- [D#+ Documentation](https://dsharpplus.github.io/DSharpPlus/)\
-- [Fundamental Data Structures and Algorithms in C#](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf)\
+- [D#+ Documentation](https://dsharpplus.github.io/DSharpPlus/)
+- [Fundamental Data Structures and Algorithms in C#](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf)
 - [Hashtables](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf#hashtable)
 - [D#+ tutorial followed](https://www.youtube.com/playlist?list=PLS6sInD7ThM0Zb8F_KBl4T_jGF1e3apsc)
