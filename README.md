@@ -43,7 +43,7 @@ Prefix: "p!" (currently "!" for quicker testing)
 - only usable in `#dedicated_channel`
 - only member who used command for that thread can use commands in that thread (prevent trolling)
 - p!setreplay only accepts 2 input from #stream_chat (message links)
-- upon `p!setreplay <start> <end>`, responds with `Creating thread...` and creates thread named `#chat_replay_[counter]`
+- upon `p!setreplay <start> <end>`, responds with `Created thread: #thread_name` and creates thread named `#chat_replay_[counter]`
 - `[counter]` starts at 1 and increments depending on how many threads starting with `chat_replay_` threads there are (or could just keep incrementing to make it easier, but would look sloppier)
 - creates thread in channel and immediately mentions the user who used `p!setreplay` in order to add them to the thread automatically
     - outputs a small embed with commands (play/pause/stop) and explanation
