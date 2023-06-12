@@ -1,7 +1,9 @@
-# phos_csharp
+# phos
 
-Discord bot named phos in C#\
-*CURRENTLY FOLLOWING A TUTORIAL, MOST CONTENTS ARE NOT ORIGINAL*\
+Discord bot named phos in C# using D#+ .NET wrapper.
+
+*CURRENTLY FOLLOWING A TUTORIAL, MOST CONTENTS ARE NOT ORIGINAL*
+
 Credit for tutorial: [DapperDino](https://github.com/dapperDino/)\
 Tutorial repository [here](https://github.com/DapperDino/Discord-Bot-Tutorial/)
 
