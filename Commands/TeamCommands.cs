@@ -40,7 +40,7 @@ namespace phos.Commands
 
             if (reaction_result.Result.Emoji == thumbs_up_emoji)
             {
-                var role = ctx.Guild.GetRole(990522104401264671);
+                var role = ctx.Guild.GetRole(990522104401264671); //tweet role in jinx's zed server 6
                 await ctx.Member.GrantRoleAsync(role).ConfigureAwait(false);
             }
             else

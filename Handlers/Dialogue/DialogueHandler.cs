@@ -65,7 +65,7 @@ namespace phos.Handlers.Dialogue
         }
         private async Task DeleteMessages()
         {
-            if (_channel.IsPrivate) { return; }
+            if (_channel.IsPrivate) { return; } // can't delete other messages in DMs
 
             foreach (var message in messages)
             {

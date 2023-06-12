@@ -9,25 +9,25 @@ using System.Threading.Tasks;
 
 namespace phos.Handlers.Dialogue.Steps
 {
-    public class TextStep : DialogueStepBase
+    public class IntStep : DialogueStepBase
     {
-        private readonly int? _min_length;
-        private readonly int? _max_length;
+        private readonly int? _min_value;
+        private readonly int? _max_value;
 
         private IDialogueStep _next_step;
 
-        public TextStep(
+        public IntStep(
             string content,
             IDialogueStep next_step,
-            int? min_length = null,
-            int? max_length = null) : base(content)
+            int? min_value = null,
+            int? max_value = null) : base(content)
         {
             _next_step = next_step;
-            _min_length = min_length;
-            _max_length = max_length;
+            _min_value = min_value;
+            _max_value = max_value;
         }
 
-        public Action<string> OnValidResult{get; set; } = delegate { };
+        public Action<int> OnValidResult{get; set; } = delegate { };
 
         public override IDialogueStep NextStep => _next_step;
 
@@ -46,14 +46,14 @@ namespace phos.Handlers.Dialogue.Steps
 
             embed_builder.AddField("To stop the dialogue", "Use the !cancel command");
 
-            if (_min_length.HasValue)
+            if (_min_value.HasValue)
             {
-                embed_builder.AddField("Min length:", $"{_min_length.Value} characters");
+                embed_builder.AddField("Min Value:", $"{_min_value.Value}");
             }
 
-            if (_max_length.HasValue)
+            if (_max_value.HasValue)
             {
-                embed_builder.AddField("Max length:", $"{_max_length.Value} characters");
+                embed_builder.AddField("Max Value:", $"{_max_value.Value}");
             }
 
             var interactivity = client.GetInteractivity();
@@ -69,30 +69,36 @@ namespace phos.Handlers.Dialogue.Steps
 
                 OnMessageAdded(message_result.Result);
 
-                if(message_result.Result.Content.Equals("!cancel", StringComparison.OrdinalIgnoreCase))
+                if(message_result.Result.Content.Equals("!cancel", StringComparison.OrdinalIgnoreCase)) //TODO add prefix + instead of hardcoding !cancel for future prefix change
                 {
                     return true; // cancelled
                 }
 
-                if (_min_length.HasValue)
+                if(!int.TryParse(message_result.Result.Content, out int input_value))
                 {
-                     if(message_result.Result.Content.Length < _min_length.Value)
-                    {
-                        await TryAgain(channel, $"Your input is {_min_length.Value - message_result.Result.Content.Length} characters too short").ConfigureAwait(false);
-                        continue;
-                    }
-                }
-                
-                if (_max_length.HasValue)
-                {
-                    if (message_result.Result.Content.Length > _max_length.Value)
-                    {
-                        await TryAgain(channel, $"Your input is {message_result.Result.Content.Length - _max_length.Value} characters too long").ConfigureAwait(false);
-                        continue;
-                    }
+                    await TryAgain(channel, "Your input is not an integer").ConfigureAwait(false);
+                    continue;
                 }
 
-                OnValidResult(message_result.Result.Content);
+                if(input_value == 69)
+                {
+                    await TryAgain(channel, "nice").ConfigureAwait(false);
+                    continue;
+                }
+
+                if (_min_value.HasValue && (input_value < _min_value.Value))
+                {
+                    await TryAgain(channel, $"Your input value {input_value} is smaller than the mininmum of {_min_value}").ConfigureAwait(false);
+                    continue;
+                }
+                
+                if (_max_value.HasValue && (input_value > _max_value.Value))
+                {
+                    await TryAgain(channel, $"Your input value {input_value} is larger than the maximum of {_max_value}").ConfigureAwait(false);
+                    continue;
+                }
+
+                OnValidResult(input_value);
 
                 return false; // not cancelled
             }
