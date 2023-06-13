@@ -40,10 +40,10 @@ Essential functions: setreplay/play/stop\
 Convenience functions: pause/speed (change speed of messages up to 2x)\
 Prefix: "p!" (currently "!" for quicker testing)
 
-- only usable in `#bot_commands_spam`
+- only usable in `#dedicated_channel`
 - only member who used command for that thread can use commands in that thread (prevent trolling)
 - p!setreplay only accepts 2 input from #stream_chat (message links)
-- upon `p!setreplay <start> <end>`, responds with `Creating thread...` and creates thread named `#chat_replay_[counter]`
+- upon `p!setreplay <start> <end>`, responds with `Created thread: #thread_name` and creates thread named `#chat_replay_[counter]`
 - `[counter]` starts at 1 and increments depending on how many threads starting with `chat_replay_` threads there are (or could just keep incrementing to make it easier, but would look sloppier)
 - creates thread in channel and immediately mentions the user who used `p!setreplay` in order to add them to the thread automatically
     - outputs a small embed with commands (play/pause/stop) and explanation
@@ -56,7 +56,7 @@ Prefix: "p!" (currently "!" for quicker testing)
 
 ## References
 
-[D#+ Documentation](https://dsharpplus.github.io/DSharpPlus/)\
-[Fundamental Data Structures and Algorithms in C#](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf)\
-[Hashtables](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf#hashtable)
-
+- [D#+ Documentation](https://dsharpplus.github.io/DSharpPlus/)
+- [Fundamental Data Structures and Algorithms in C#](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf)
+- [Hashtables](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf#hashtable)
+- [D#+ tutorial followed](https://www.youtube.com/playlist?list=PLS6sInD7ThM0Zb8F_KBl4T_jGF1e3apsc)
