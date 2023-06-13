@@ -2,6 +2,7 @@ config.json
 bin/
 obj/
 .vs/
+.sln
 ## do NOT add .csproj nor .sln here
 
 # stolen from https://stackoverflow.com/questions/30868544/gitignore-wont-ignore-vs-folder
