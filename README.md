@@ -1,4 +1,4 @@
-# phos_csharp
+# phos
 
 Discord bot named phos in C# using D#+ .NET wrapper.
 
