@@ -6,17 +6,47 @@ using phos.Attributes;
 using phos.Handlers.Dialogue;
 using phos.Handlers.Dialogue.Steps;
 
+using System.Net.NetworkInformation;
+
 namespace phos.Commands
 {
     public class TestCommands : BaseCommandModule
     {
         [Command("ping")]
-        [Description("Responds with pong or some other quirky message.")]
+        [Description("Responds with ping to https://discord.com")]
         [RequireCategoriesAttributes(ChannelCheckMode.Any, "Text Channels")]
         public async Task Ping(CommandContext ctx)
         {
-            await ctx.Channel.SendMessageAsync("pong!")
-                .ConfigureAwait(false);
+            Ping myPing = new Ping();
+            PingReply reply = myPing.Send("162.159.128.233", 1000);
+            long rtt = -1;
+
+            try
+            {
+                if (reply != null)
+                {
+                    rtt = reply.RoundtripTime;
+                    Console.WriteLine("Status :  " + reply.Status                         
+                        + " \n Time : " + reply.RoundtripTime.ToString() 
+                        + " \n Address : " + reply.Address);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Timeout error.");
+            }
+
+            if(rtt != -1)
+            {
+                await ctx.Channel.SendMessageAsync(
+                    "Response time to discord.com: " + rtt.ToString() + "ms").ConfigureAwait(false);
+            }
+            else
+            {
+                await ctx.Channel.SendMessageAsync(
+                    "Request to discord.com timed out").ConfigureAwait(false);
+            }
+            
         }
 
         [Command("add")]
@@ -113,11 +143,11 @@ namespace phos.Commands
         [Description("starts a dialogue with the bot")]
         public async Task Dialogue(CommandContext ctx)
         {
-            var input_step = new TextStep("Enter something interesting", null/*temp null*/);
-            // var witty_step = new TextStep("Wow you're so funny", null);
-            var int_step = new IntStep("haha funny", null, max_value: 100);
+            var input_step = new TextStep("Enter something interesting", null, 10);
+            var witty_step = new IntStep("haha funny", null, max_value: 100);
 
             string input = string.Empty;
+            int value = 0;
 
             input_step.OnValidResult += (result) =>
             {
@@ -125,12 +155,12 @@ namespace phos.Commands
 
                 if (result.ToLower() == "something interesting")
                 {
-                    // input_step.SetNextStep(witty_step);
-                    input_step.SetNextStep(max_value); //************ HERE AT 16:31
+                    input_step.SetNextStep(witty_step); 
 
                 }
             }; // subscribe to input, add input to result 
 
+            witty_step.OnValidResult += (result) => value = result;
 
 
             var user_channel = await ctx.Member.CreateDmChannelAsync().ConfigureAwait(false); // how to allow DMs with bot
@@ -147,6 +177,8 @@ namespace phos.Commands
             if(!succeeded) { return; }
 
             await ctx.Channel.SendMessageAsync(input).ConfigureAwait(false);
+
+            await ctx.Channel.SendMessageAsync(value.ToString()).ConfigureAwait(false);
 
         }
 

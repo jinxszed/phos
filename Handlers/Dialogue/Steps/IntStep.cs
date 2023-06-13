@@ -19,12 +19,12 @@ namespace phos.Handlers.Dialogue.Steps
         public IntStep(
             string content,
             IDialogueStep next_step,
-            int? min_length = null,
-            int? max_length = null) : base(content)
+            int? min_value = null,
+            int? max_value = null) : base(content)
         {
             _next_step = next_step;
-            _min_value = min_length;
-            _max_value = max_length;
+            _min_value = min_value;
+            _max_value = max_value;
         }
 
         public Action<int> OnValidResult{get; set; } = delegate { };
@@ -69,7 +69,7 @@ namespace phos.Handlers.Dialogue.Steps
 
                 OnMessageAdded(message_result.Result);
 
-                if(message_result.Result.Content.Equals("!cancel", StringComparison.OrdinalIgnoreCase))
+                if(message_result.Result.Content.Equals("!cancel", StringComparison.OrdinalIgnoreCase)) //TODO add prefix + instead of hardcoding !cancel for future prefix change
                 {
                     return true; // cancelled
                 }
@@ -80,22 +80,22 @@ namespace phos.Handlers.Dialogue.Steps
                     continue;
                 }
 
-                if (_min_value.HasValue)
+                if(input_value == 69)
                 {
-                     if(input_value < _min_value.Value)
-                    {
-                        await TryAgain(channel, $"Your input value {input_value} is smaller than the mininmum of {_min_value}").ConfigureAwait(false);
-                        continue;
-                    }
+                    await TryAgain(channel, "nice").ConfigureAwait(false);
+                    continue;
+                }
+
+                if (_min_value.HasValue && (input_value < _min_value.Value))
+                {
+                    await TryAgain(channel, $"Your input value {input_value} is smaller than the mininmum of {_min_value}").ConfigureAwait(false);
+                    continue;
                 }
                 
-                if (_max_value.HasValue)
+                if (_max_value.HasValue && (input_value > _max_value.Value))
                 {
-                    if (input_value > _max_value.Value)
-                    {
-                        await TryAgain(channel, $"Your input value {input_value} is larger than the maximum of {_max_value}").ConfigureAwait(false);
-                        continue;
-                    }
+                    await TryAgain(channel, $"Your input value {input_value} is larger than the maximum of {_max_value}").ConfigureAwait(false);
+                    continue;
                 }
 
                 OnValidResult(input_value);
