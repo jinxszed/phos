@@ -3,10 +3,12 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using phos.Attributes;
+using phos.Bots.Handlers.Dialogue.Steps;
 using phos.Handlers.Dialogue;
 using phos.Handlers.Dialogue.Steps;
 
 using System.Net.NetworkInformation;
+using static phos.Bots.Handlers.Dialogue.Steps.ReactionStep;
 
 namespace phos.Commands
 {
@@ -69,6 +71,13 @@ namespace phos.Commands
                 .SendMessageAsync("username: " + ctx.Member.Username
                 + "\ndisplay name: " + ctx.Member.Nickname)
                 .ConfigureAwait(false);
+        }
+
+        [Command("jaelle")]
+        [Description("tells jaelle to google it")]
+        public async Task Jaelle(CommandContext ctx)
+        {
+            await ctx.Channel.SendMessageAsync("Google it.").ConfigureAwait(false);
         }
 
         // TODO
@@ -180,6 +189,37 @@ namespace phos.Commands
 
             await ctx.Channel.SendMessageAsync(value.ToString()).ConfigureAwait(false);
 
+        }
+
+        //note: this doesnt automatically cancel every instance of dialogue and needs to be manually cancelled. fix this
+        //figure out how to make this happen in the server channel instead
+        [Command("emojidialogue")]
+        public async Task EmojiDialogue(CommandContext ctx)
+        {
+            var yes_step = new TextStep("You chose yes", null);
+            var no_step = new IntStep("You chose no", null);
+
+            var emoji_step = new ReactionStep("Yes Or No?", new Dictionary<DiscordEmoji, ReactionStepData>
+            {
+                { DiscordEmoji.FromName(ctx.Client, ":thumbsup:"), new ReactionStepData { 
+                    Content = "This means yes", NextStep = yes_step } },
+
+                { DiscordEmoji.FromName(ctx.Client, ":thumbsdown:"), new ReactionStepData { 
+                    Content = "This means no", NextStep = no_step } }
+            });
+
+            var user_channel = await ctx.Member.CreateDmChannelAsync().ConfigureAwait(false);
+
+            var input_dialogue_handler = new DialogueHandler(
+                ctx.Client,
+                user_channel,
+                ctx.User,
+                emoji_step
+            );
+
+            bool succeeded = await input_dialogue_handler.ProcessDialogue().ConfigureAwait(false);
+
+            if (!succeeded) { return; }
         }
 
     }
