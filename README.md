@@ -5,6 +5,8 @@ Discord bot named phos in C#\
 Credit for tutorial: [DapperDino](https://github.com/dapperDino/)\
 Tutorial repository [here](https://github.com/DapperDino/Discord-Bot-Tutorial/)
 
+rename test
+
 ## Goals
 
 - Deepen understanding of C#, network communications, windows development, and database interaction, and develop my first proper application
