@@ -1,5 +1,5 @@
 # phos
-
+# test to check if redirects to repo after name change
 Discord bot named phos in C# using D#+ .NET wrapper.
 
 *CURRENTLY FOLLOWING A TUTORIAL, MOST CONTENTS ARE NOT ORIGINAL*
