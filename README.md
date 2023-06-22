@@ -55,7 +55,7 @@ Prefix: "p!" (currently "!" for quicker testing)
 - thread set to expire after 1 hour (or 30 minutes)
     - phos deletes thread immediately after thread is closed
         - make sure phos doesn't delete the channel itself, only the thread 
-- make sure phos never mentions users in chat replay (if someone sends `@jinxzed` in chat, phos will send `@/jinxszed` so as to not mention user jinxszed)
+- make sure phos never mentions users in chat replay (if someone sends `@karmotrinedream` in chat, phos will send `@/karmotrinedream` so as to not mention user jinxszed)
 - handle external emotes and stickers (easy? have to investigate)
 - (TENTATIVE IDEA) grabs message from start to end, inclusively, and stores message contents and timestamp in a table(? or hash map or dictionary idk), maybe could be done without a data structure. probably.
 
